@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_weather/model/weather_model.dart';
 
+/// This is the data provider. Lowest layer in the architecture
+/// This is where we will hit the endpoints
 class WeatherApiClient {
   static const baseUrl = 'https://www.metaweather.com';
   final http.Client httpClient;
