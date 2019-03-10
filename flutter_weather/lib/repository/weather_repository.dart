@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter_weather/repository/weather_api_client.dart';
 import 'package:flutter_weather/model/weather_model.dart';
 
