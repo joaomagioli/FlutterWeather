@@ -7,6 +7,8 @@ abstract class WeatherEvent extends Equatable {
 class FetchWeather extends WeatherEvent {
   final String city;
 
+  // Always we receive a city, we will dispatch an event
+  // The bloc is responsible for getting this event and sending back a state
   FetchWeather(this.city)
       : assert(city != null),
         super([city]);
