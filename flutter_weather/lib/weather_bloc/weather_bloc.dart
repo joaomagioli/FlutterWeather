@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_weather/weather_bloc/weather_event.dart';
 import 'package:flutter_weather/weather_bloc/weather_state.dart';
@@ -14,13 +13,19 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   WeatherBloc({this.weatherRepository}) : assert(weatherRepository != null);
 
   @override
-  // TODO: implement initialState
   WeatherState get initialState => WeatherEmpty();
 
   @override
   Stream<WeatherState> mapEventToState(
-      WeatherState currentState, WeatherEvent event) {
-    // TODO: implement mapEventToState
-    return null;
+      WeatherState currentState, WeatherEvent event) async* {
+    if (event is FetchWeather) {
+      yield WeatherLoading();
+      try {
+        final Weather weather = await weatherRepository.getWeather(event.city);
+        yield WeatherLoaded(weather);
+      } catch (_) {
+        yield WeatherError();
+      }
+    }
   }
 }
